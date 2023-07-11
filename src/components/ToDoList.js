@@ -12,7 +12,7 @@ function ToDoList() {
     ]);
 
     //Comportement
-    const handleDelete = (id) => { 
+    const handleDelete = (id) => {
         //1. Creer une copie du state
         const tachesCopy = [...taches]
 
@@ -35,14 +35,48 @@ function ToDoList() {
 
     }
 
+    const handleDuplicate = (id) => {
+        //1. Copie du state
+        const tachesCopy = [...taches]
+
+        //2. Manipulation de la copie
+        const ligneTrouvee = tachesCopy.find(element => element.id === id);
+
+        if (ligneTrouvee) {
+            const nouvelId = new Date().getTime()
+            const ligneDupliquee = { ...ligneTrouvee, id: nouvelId };
+            tachesCopy.push(ligneDupliquee);
+        }
+
+        //3. Modifier le state avec le setter
+        setTaches(tachesCopy)
+
+    }
+
+    const handleRename = (taskId, newTaskName) => {
+        // Mettre à jour le nom de la tâche avec l'ID spécifié
+        const updatedTasks = taches.map((tache) => {
+            if (tache.id === taskId) {
+                return { ...tache, nom: newTaskName };
+            }
+            return tache;
+        });
+        setTaches(updatedTasks);
+    };
+
+
     //Affichage
     return (
-        <main className='bg-light'>
-            <h1 className='text-center'>Liste de choses à faire</h1>
+        <main className='bg-light pt-3'>
             <TacheForm handleAdd={handleAdd} />
             <ol className='list-group list-group-numbered'>
                 {taches.map((tache) => (
-                    <Tache tacheInfo={tache} onTacheDelete={handleDelete} key={tache.id}/>
+                    <Tache
+                        tacheInfo={tache}
+                        onClick={() => handleDelete(tache.id)}
+                        onClick2={() => handleDuplicate(tache.id)}
+                        handleRename={handleRename}
+                        key={tache.id} />
                 ))}
             </ol>
         </main>
