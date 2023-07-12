@@ -3,12 +3,13 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import Tache from './Tache'
 import TacheForm from './TacheForm'
 
+
 function ToDoList() {
     //State (état, données)
     const [taches, setTaches] = useState([
-        { id: 1, nom: "Envoyer un mail" },
-        { id: 2, nom: "Faire un projet reactjs" },
-        { id: 3, nom: "Apprendre Laravel" }
+        { id: 1, nom: "Envoyer un mail", priorité: "faible" },
+        { id: 2, nom: "Faire un projet reactjs", priorité: "importante" },
+        { id: 3, nom: "Apprendre Laravel", priorité: "normale" }
     ]);
 
     //Comportement
@@ -56,7 +57,7 @@ function ToDoList() {
     const handleRename = (taskId, newTaskName) => {
         // Mettre à jour le nom de la tâche avec l'ID spécifié
         const updatedTasks = taches.map((tache) => {
-            if (tache.id === taskId) {
+            if ((tache.id === taskId) && (newTaskName !== "")) {
                 return { ...tache, nom: newTaskName };
             }
             return tache;
@@ -64,6 +65,17 @@ function ToDoList() {
         setTaches(updatedTasks);
     };
 
+    const handlePriorityChange = (tacheId, event) => {
+        const updatedtaches = taches.map(tache => {
+            if (tache.id === tacheId) {
+                tache.priorité = event.target.value;
+            }
+            return tache;
+        });
+
+        setTaches(updatedtaches);
+    };
+    console.log(taches)
 
     //Affichage
     return (
@@ -76,6 +88,7 @@ function ToDoList() {
                         onClick={() => handleDelete(tache.id)}
                         onClick2={() => handleDuplicate(tache.id)}
                         handleRename={handleRename}
+                        handlePriorityChange={handlePriorityChange}
                         key={tache.id} />
                 ))}
             </ol>

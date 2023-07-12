@@ -10,21 +10,24 @@ const StyledButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 2px;
-    background-color: orange;
+    background-color: black;
     font-weight: bold;
-    font-size: 15px
+    font-size: 10px
     `
 const StyledLi = styled.li`
-    background-color: orange;
+    background-color: ${props => (props.priority === 'faible' ? 'papayawhip' : props.priority === 'normale' ? 'orange' : 'red')};
     `
 
 const StyledButton2 = styled.button`
     background-color: black;
     color: orange;
     `
+const StyledButton3 = styled.button`
+    background-color: cornsilk;
+    font-weight: bold
+    `
 
-export default function Tache({ tacheInfo, onClick, onClick2, handleRename }) {
+export default function Tache({ tacheInfo, onClick, onClick2, handleRename, handlePriorityChange }) {
     const [nouveauNom, setNouveauNom] = useState('');
 
     const handleChangeNom = (e) => {
@@ -38,17 +41,29 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename }) {
 
     //affichage
     return (
-        <StyledLi className='list-group-item d-flex flex-wrap justify-content-center gap-3 align-items-start'>{tacheInfo.nom}
-            <StyledButton onClick={onClick}>X</StyledButton>
-            <StyledButton2 onClick={onClick2}>Dupliquer</StyledButton2>
-            <input
-                className='text-center'
-                type="text"
-                value={nouveauNom}
-                placeholder='Renommer la tâche'
-                onChange={handleChangeNom} />
-            <StyledButton2
-                onClick={handleRenameClick}>Renommer</StyledButton2>
+        <StyledLi priority={tacheInfo.priorité} className='list-group-item d-flex flex-wrap justify-content-center gap-3 align-items-start'>{tacheInfo.nom}
+            <StyledButton onClick={onClick}>&#10060;</StyledButton>
+            <StyledButton2 onClick={onClick2}>&#x29C9;</StyledButton2>
+            <div className='flex-nowrap'>
+                <input
+                    className='text-center'
+                    type="text"
+                    value={nouveauNom}
+                    placeholder='Renommer la tâche'
+                    onChange={handleChangeNom} />
+                <StyledButton3 onClick={handleRenameClick}>&#10003;</StyledButton3>
+            </div>
+            <div>
+                <label htmlFor="priority">Priorité :&nbsp;</label>
+                <select
+                    className='text-center'
+                    value={tacheInfo.priorité}
+                    onChange={event => handlePriorityChange(tacheInfo.id, event)}>
+                    <option value="faible">Faible</option>
+                    <option value="normale">Normale</option>
+                    <option value="importante">Importante</option>
+                </select>
+            </div>
         </StyledLi>
     )
 }
