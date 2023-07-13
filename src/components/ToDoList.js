@@ -1,8 +1,19 @@
 import { useState } from 'react'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import styled from 'styled-components'
 import Tache from './Tache'
 import TacheForm from './TacheForm'
 
+const UlStyled = styled.ul`
+    width: 330px;
+    margin: auto;
+    padding: 0 20px 20px 20px
+`
+
+const MainStyled = styled.div`
+    width: 330px;
+    margin: auto;
+`
 
 function ToDoList() {
     //State (état, données)
@@ -29,11 +40,10 @@ function ToDoList() {
         const tachesCopy = [...taches]
 
         //2. Manipulation de la copie
+        // tachesCopy.push({ ...tacheAAjouter, priorité: "normale" });
         tachesCopy.push(tacheAAjouter)
-
         //3. Modifier le state avec le setter
         setTaches(tachesCopy)
-
     }
 
     const handleDuplicate = (id) => {
@@ -75,13 +85,12 @@ function ToDoList() {
 
         setTaches(updatedtaches);
     };
-    console.log(taches)
 
     //Affichage
     return (
-        <main className='bg-light pt-3'>
+        <MainStyled className='bg-secondary pt-3'>
             <TacheForm handleAdd={handleAdd} />
-            <ol className='list-group list-group-numbered'>
+            <UlStyled className='list-group list-group-numbered m-auto'>
                 {taches.map((tache) => (
                     <Tache
                         tacheInfo={tache}
@@ -91,8 +100,8 @@ function ToDoList() {
                         handlePriorityChange={handlePriorityChange}
                         key={tache.id} />
                 ))}
-            </ol>
-        </main>
+            </UlStyled>
+        </MainStyled>
     )
 }
 

@@ -31,7 +31,9 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
     const [nouveauNom, setNouveauNom] = useState('');
 
     const handleChangeNom = (e) => {
-        setNouveauNom(e.target.value);
+        if (e.target.value !== '') {
+            setNouveauNom(e.target.value);
+        }
     };
 
     const handleRenameClick = () => {
@@ -41,17 +43,17 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
 
     //affichage
     return (
-        <StyledLi priority={tacheInfo.priorité} className='list-group-item d-flex flex-wrap justify-content-center gap-3 align-items-start'>{tacheInfo.nom}
-            <StyledButton onClick={onClick}>&#10060;</StyledButton>
-            <StyledButton2 onClick={onClick2}>&#x29C9;</StyledButton2>
-            <div className='flex-nowrap'>
+        <StyledLi priority={tacheInfo.priorité} className='list-group-item d-flex flex-wrap justify-content-evenly align-items-center'>{tacheInfo.nom}
+            <StyledButton onClick={onClick} title='Supprimer la tâche'>&#10060;</StyledButton>
+            <StyledButton2 onClick={onClick2} title='Dupliquer la tâche'>&#x29C9;</StyledButton2>
+            <div className='flex-nowrap p-2'>
                 <input
                     className='text-center'
                     type="text"
                     value={nouveauNom}
                     placeholder='Renommer la tâche'
                     onChange={handleChangeNom} />
-                <StyledButton3 onClick={handleRenameClick}>&#10003;</StyledButton3>
+                <StyledButton3 onClick={handleRenameClick} title='Renommer la tâche'>&#10003;</StyledButton3>
             </div>
             <div>
                 <label htmlFor="priority">Priorité :&nbsp;</label>

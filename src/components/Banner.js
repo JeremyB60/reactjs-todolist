@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 const StyledBanner = styled.div`
 height: 150px;
+width: 330px;
+margin: auto;
+text-align: center;
 `;
 
 const StyledText = styled.p`
@@ -12,7 +15,7 @@ const StyledText = styled.p`
 
 function Banner() {
     return <StyledBanner className='bg-dark text-light d-flex justify-content-center flex-column align-items-center'>
-        <h1>To do list by Jeremy</h1>
+        <h1>Liste de tâches à&nbsp;réaliser</h1>
         <StyledText>Premier mini-projet Reactjs</StyledText>
     </StyledBanner>
 }

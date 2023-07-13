@@ -15,9 +15,11 @@ export default function TacheForm({ handleAdd }) {
         event.preventDefault();
         const id = new Date().getTime()
         const nom = nouvelleTache
-        const tacheAAjouter = ({ id, nom })
-        handleAdd(tacheAAjouter)
-        setNouvelleTache("")
+        const tacheAAjouter = ({ id: id, nom: nom, priorité: "normale" })
+        if (nom !== '') {
+            handleAdd(tacheAAjouter)
+            setNouvelleTache("")
+        }
     }
 
     const handleChange = (event) => {
