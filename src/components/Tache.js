@@ -73,8 +73,9 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
                 <StyledButton onClick={onClick2} title='Dupliquer la tâche'>&#x29C9;</StyledButton>
                 <StyledButton onClick={() => setEstVisible(!estVisible)} title='Renommer la tâche'>&#x270F;</StyledButton>
                 <div>
-                    <label htmlFor="priority">Priorité :&nbsp;</label>
+                    <label htmlFor={tacheInfo.id+"priority"}>Priorité :&nbsp;</label>
                     <StyledSelect
+                        id={tacheInfo.id+"priority"}
                         className='text-center'
                         value={tacheInfo.priorité}
                         onChange={event => handlePriorityChange(tacheInfo.id, event)}>
@@ -87,6 +88,7 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
             {estVisible && <div>
                 <div className='flex-nowrap p-2'>
                     <input
+                        id={tacheInfo.id+1}
                         autoFocus
                         className='text-center'
                         type="text"

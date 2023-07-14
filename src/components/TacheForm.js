@@ -35,6 +35,7 @@ export default function TacheForm({ handleAdd }) {
     return (
         <form action="submit" onSubmit={handleSubmit} className='text-center mb-3'>
             <input
+                id='ajouterTache'
                 className='text-center'
                 value={nouvelleTache}
                 type='text'
