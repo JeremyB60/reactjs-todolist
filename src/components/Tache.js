@@ -22,6 +22,7 @@ const StyledButton = styled.button`
 
 const StyledLi = styled.li`
     background-color: ${props => (props.priority === 'faible' ? 'papayawhip' : props.priority === 'normale' ? 'orange' : 'red')};
+    color: black
     `
 const StyledButton3 = styled.button`
     background-color: cornsilk;
@@ -31,6 +32,10 @@ const StyledButton3 = styled.button`
         background-color: pink
     }
     `
+const StyledSelect = styled.select`
+    background-color: #00000000;
+    border: 0;
+`
 
 export default function Tache({ tacheInfo, onClick, onClick2, handleRename, handlePriorityChange }) {
     const [nouveauNom, setNouveauNom] = useState('');
@@ -62,11 +67,22 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
 
     //affichage
     return (
-        <StyledLi priority={tacheInfo.priorité} className='list-group-item d-flex flex-wrap gap-1 justify-content-evenly align-items-center'>{tacheInfo.nom}
+        <StyledLi priority={tacheInfo.priorité} className='list-group-item d-flex flex-wrap gap-1 justify-content-evenly align-items-center flex-column'>{tacheInfo.nom}
             <div className='d-flex flex-row-reverse gap-1'>
                 <StyledButton onClick={onClick} title='Supprimer la tâche'>&#10060;</StyledButton>
                 <StyledButton onClick={onClick2} title='Dupliquer la tâche'>&#x29C9;</StyledButton>
                 <StyledButton onClick={() => setEstVisible(!estVisible)} title='Renommer la tâche'>&#x270F;</StyledButton>
+                <div>
+                    <label htmlFor="priority">Priorité :&nbsp;</label>
+                    <StyledSelect
+                        className='text-center'
+                        value={tacheInfo.priorité}
+                        onChange={event => handlePriorityChange(tacheInfo.id, event)}>
+                        <option value="faible">Faible</option>
+                        <option value="normale">Normale</option>
+                        <option value="importante">Importante</option>
+                    </StyledSelect>
+                </div>
             </div>
             {estVisible && <div>
                 <div className='flex-nowrap p-2'>
@@ -82,17 +98,7 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
                 </div>
             </div>
             }
-            <div>
-                <label htmlFor="priority">Priorité :&nbsp;</label>
-                <select
-                    className='text-center'
-                    value={tacheInfo.priorité}
-                    onChange={event => handlePriorityChange(tacheInfo.id, event)}>
-                    <option value="faible">Faible</option>
-                    <option value="normale">Normale</option>
-                    <option value="importante">Importante</option>
-                </select>
-            </div>
+
         </StyledLi>
     )
 }

@@ -5,16 +5,14 @@ import Tache from './Tache'
 import TacheForm from './TacheForm'
 
 const UlStyled = styled.ul`
-    width: 330px;
-    margin: auto;
-    padding: 0 20px 20px 20px;
     text-align: center;
 `
-
 const MainStyled = styled.div`
     width: 330px;
-    margin: auto;
     font-family: Exo;
+    border-radius: 0 0 20px 20px;
+    border: 10px outset black;
+    border-top: 0;
 `
 function ToDoList() {
 
@@ -23,7 +21,7 @@ function ToDoList() {
     const [taches, setTaches] = useState(() => {
         const storedTaches = localStorage.getItem('taches');
         return storedTaches ? JSON.parse(storedTaches) : [];
-      });
+    });
 
     useEffect(() => {
         localStorage.setItem('taches', JSON.stringify(taches));
@@ -36,7 +34,7 @@ function ToDoList() {
         }
     }, []);
 
-    
+
     //Comportement
     const handleDelete = (id) => {
         //1. Creer une copie du state

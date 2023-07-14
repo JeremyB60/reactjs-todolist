@@ -5,9 +5,11 @@ import '../assets/css/style.css'
 const StyledBanner = styled.div`
 height: 150px;
 width: 330px;
-margin: auto;
 text-align: center;
 font-family: 'Exo';
+border-radius: 20px 20px 0 0;
+border: 10px outset black;
+border-bottom: 0;
 `;
 
 const StyledText = styled.p`
@@ -17,8 +19,8 @@ const StyledText = styled.p`
 
 function Banner() {
   return <StyledBanner className='bg-dark text-light d-flex justify-content-center flex-column align-items-center'>
-    <h1>Liste de tâches à&nbsp;réaliser</h1>
-    <StyledText>Premier mini-projet Reactjs</StyledText>
+    <h1 className='fs-4 pt-2 m-1'>Liste de tâches à&nbsp;réaliser</h1>
+    <StyledText className='m-0'>Premier mini-projet Reactjs</StyledText>
   </StyledBanner>
 }
 
