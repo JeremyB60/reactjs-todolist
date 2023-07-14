@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import styled from 'styled-components'
 import Tache from './Tache'
@@ -7,22 +7,36 @@ import TacheForm from './TacheForm'
 const UlStyled = styled.ul`
     width: 330px;
     margin: auto;
-    padding: 0 20px 20px 20px
+    padding: 0 20px 20px 20px;
+    text-align: center;
 `
 
 const MainStyled = styled.div`
     width: 330px;
     margin: auto;
+    font-family: Exo;
 `
-
 function ToDoList() {
-    //State (état, données)
-    const [taches, setTaches] = useState([
-        { id: 1, nom: "Envoyer un mail", priorité: "faible" },
-        { id: 2, nom: "Faire un projet reactjs", priorité: "importante" },
-        { id: 3, nom: "Apprendre Laravel", priorité: "normale" }
-    ]);
 
+    //State (état, données)
+
+    const [taches, setTaches] = useState(() => {
+        const storedTaches = localStorage.getItem('taches');
+        return storedTaches ? JSON.parse(storedTaches) : [];
+      });
+
+    useEffect(() => {
+        localStorage.setItem('taches', JSON.stringify(taches));
+    }, [taches]);
+
+    useEffect(() => {
+        const storedTaches = JSON.parse(localStorage.getItem('taches'));
+        if (storedTaches) {
+            setTaches(storedTaches);
+        }
+    }, []);
+
+    
     //Comportement
     const handleDelete = (id) => {
         //1. Creer une copie du state
@@ -73,7 +87,7 @@ function ToDoList() {
             return tache;
         });
         setTaches(updatedTasks);
-    };
+    }
 
     const handlePriorityChange = (tacheId, event) => {
         const updatedtaches = taches.map(tache => {
@@ -84,25 +98,26 @@ function ToDoList() {
         });
 
         setTaches(updatedtaches);
-    };
+    }
 
     //Affichage
     return (
         <MainStyled className='bg-secondary pt-3'>
             <TacheForm handleAdd={handleAdd} />
-            <UlStyled className='list-group list-group-numbered m-auto'>
-                {taches.map((tache) => (
+            <UlStyled className='list-group m-auto'>
+                {taches.map((tache, index) => (
                     <Tache
                         tacheInfo={tache}
                         onClick={() => handleDelete(tache.id)}
                         onClick2={() => handleDuplicate(tache.id)}
                         handleRename={handleRename}
                         handlePriorityChange={handlePriorityChange}
-                        key={tache.id} />
+                        key={index} />
                 ))}
             </UlStyled>
         </MainStyled>
     )
 }
+
 
 export default ToDoList

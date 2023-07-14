@@ -3,8 +3,13 @@ import styled from 'styled-components'
 import { useState } from 'react'
 
 const StyledButton2 = styled.button`
-background-color: black;
-color: orange
+    background-color: black;
+    color: orange;
+
+&:hover {
+    color: black;
+    background-color: orange;
+}
 `
 export default function TacheForm({ handleAdd }) {
     //state
@@ -29,12 +34,13 @@ export default function TacheForm({ handleAdd }) {
     //affichage
     return (
         <form action="submit" onSubmit={handleSubmit} className='text-center mb-3'>
-            <input className='text-center'
+            <input
+                className='text-center'
                 value={nouvelleTache}
                 type='text'
                 placeholder='Ajouter une tâche'
                 onChange={handleChange} />
-            <StyledButton2>Ajouter</StyledButton2>
+            <StyledButton2 title='Ajouter une tâche'>Ajouter</StyledButton2>
         </form>
     )
 }
