@@ -3,8 +3,8 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import styled from 'styled-components'
 import Tache from './Tache'
 import TacheForm from './TacheForm'
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import Banner from './Banner'
 
 const UlStyled = styled.ul`
     text-align: center;
@@ -12,9 +12,8 @@ const UlStyled = styled.ul`
 const MainStyled = styled.div`
     font-family: Exo;
     width: 330px;
-    border-radius: 0 0 20px 20px;
+    border-radius: 20px;
     border: 10px outset black;
-    border-top: 0;
 `
 
 // a little function to help us with reordering the result
@@ -64,6 +63,7 @@ function ToDoList() {
 
 
     //Comportement
+
     const handleDelete = (id) => {
         //1. Creer une copie du state
         const tachesCopy = [...taches]
@@ -139,9 +139,12 @@ function ToDoList() {
         setTaches(updatedTaches);
     };
 
+    const longueurTableau = taches.length;
+
     //Affichage
     return (
-        <MainStyled className='bg-secondary pt-3'>
+        <MainStyled className='bg-secondary'>
+            <Banner longueur={longueurTableau} />
             <TacheForm handleAdd={handleAdd} />
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="droppable">

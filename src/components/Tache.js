@@ -71,7 +71,7 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
             <div className='d-flex flex-row-reverse gap-1'>
                 <StyledButton onClick={onClick} title='Supprimer la tâche'>&#10060;</StyledButton>
                 <StyledButton onClick={onClick2} title='Dupliquer la tâche'>&#x29C9;</StyledButton>
-                <StyledButton onClick={() => setEstVisible(!estVisible)} title='Renommer la tâche'>&#x270F;</StyledButton>
+                <StyledButton onClick={() => setEstVisible(!estVisible)} title='Renommer la tâche'>{((!estVisible) ? <span dangerouslySetInnerHTML={{__html: '&#x270F;'}}></span> : <span dangerouslySetInnerHTML={{__html: '&#9650;'}}></span>)}</StyledButton>
                 <div>
                     <label htmlFor={tacheInfo.id+"priority"}>Priorité :&nbsp;</label>
                     <StyledSelect

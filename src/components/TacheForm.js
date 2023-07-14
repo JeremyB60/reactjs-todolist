@@ -33,7 +33,7 @@ export default function TacheForm({ handleAdd }) {
 
     //affichage
     return (
-        <form action="submit" onSubmit={handleSubmit} className='text-center mb-3'>
+        <form action="submit" onSubmit={handleSubmit} className='text-center my-3'>
             <input
                 id='ajouterTache'
                 className='text-center'

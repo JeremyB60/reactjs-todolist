@@ -5,3 +5,7 @@
     font-family: Exo;
     src: url(../fonts/Exo-VariableFont_wght.ttf);
 }
+
+input {
+    border-radius: 5px;
+}
