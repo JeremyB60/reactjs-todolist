@@ -1,4 +1,4 @@
-# ToDoList en ReactJS (1er mini-projet pour découvrir le Framework/biblitohèque)
+# ToDoList en ReactJS (1er mini-projet pour découvrir)
 
 Appli avec Create React App pour apprendre les bases (CRUD)
 
