@@ -12,7 +12,6 @@ const StyledText = styled.p`
   color: orange;
 `;
 
-
 function Banner({ longueur }) {
 
   return <StyledBanner className='bg-dark text-light d-flex justify-content-center flex-column align-items-center'>

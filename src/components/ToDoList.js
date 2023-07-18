@@ -16,24 +16,18 @@ const MainStyled = styled.div`
     border: 10px outset black;
 `
 
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
+const reorder = (liste, indexDebut, indexFin) => {
+    const resultat = Array.from(liste);
+    const [elementRetire] = resultat.splice(indexDebut, 1);
+    resultat.splice(indexFin, 0, elementRetire);
+    return resultat;
 };
 
 const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
     userSelect: "none",
-
-    // change background colour if dragging
     background: isDragging ? "lightgreen" : "grey",
-
-    // styles we need to apply on draggables
     ...draggableStyle,
 });
 
@@ -46,98 +40,91 @@ function ToDoList() {
     //State (état, données)
 
     const [taches, setTaches] = useState(() => {
-        const storedTaches = localStorage.getItem('taches');
-        return storedTaches ? JSON.parse(storedTaches) : [];
+        const tachesStockees = localStorage.getItem('taches');
+        return tachesStockees ? JSON.parse(tachesStockees) : [];
     });
-
+    
     useEffect(() => {
         localStorage.setItem('taches', JSON.stringify(taches));
     }, [taches]);
-
+    
     useEffect(() => {
-        const storedTaches = JSON.parse(localStorage.getItem('taches'));
-        if (storedTaches) {
-            setTaches(storedTaches);
+        const tachesStockees = JSON.parse(localStorage.getItem('taches'));
+        if (tachesStockees) {
+            setTaches(tachesStockees);
         }
     }, []);
+    
 
 
     //Comportement
 
     const handleDelete = (id) => {
-        //1. Creer une copie du state
-        const tachesCopy = [...taches]
-
+        //1. Copie du state
+        const tachesCopie = [...taches];
         //2. Manipuler la copie
-        const tachesCopyUpdated = tachesCopy.filter(tache => tache.id !== id)
-
+        const tachesCopieMisesAJour = tachesCopie.filter(tache => tache.id !== id);
         //3. Modifier avec le setter
-        setTaches(tachesCopyUpdated)
-    }
+        setTaches(tachesCopieMisesAJour);
+    }   
 
     const handleAdd = (tacheAAjouter) => {
         //1. Copie du state
-        const tachesCopy = [...taches]
-
+        const tachesCopie = [...taches]
         //2. Manipulation de la copie
-        // tachesCopy.push({ ...tacheAAjouter, priorité: "normale" });
-        tachesCopy.push(tacheAAjouter)
+        tachesCopie.push(tacheAAjouter)
         //3. Modifier le state avec le setter
-        setTaches(tachesCopy)
+        setTaches(tachesCopie)
     }
 
     const handleDuplicate = (id) => {
         //1. Copie du state
-        const tachesCopy = [...taches]
-
+        const tachesCopie = [...taches]
         //2. Manipulation de la copie
-        const ligneTrouvee = tachesCopy.find(element => element.id === id);
-
+        const ligneTrouvee = tachesCopie.find(element => element.id === id);
         if (ligneTrouvee) {
             const nouvelId = new Date().getTime()
             const ligneDupliquee = { ...ligneTrouvee, id: nouvelId };
-            tachesCopy.push(ligneDupliquee);
+            tachesCopie.push(ligneDupliquee);
         }
-
         //3. Modifier le state avec le setter
-        setTaches(tachesCopy)
-
+        setTaches(tachesCopie)
     }
 
-    const handleRename = (taskId, newTaskName) => {
+    const handleRename = (idTache, nouveauNomTache) => {
         // Mettre à jour le nom de la tâche avec l'ID spécifié
-        const updatedTasks = taches.map((tache) => {
-            if ((tache.id === taskId) && (newTaskName !== "")) {
-                return { ...tache, nom: newTaskName };
+        const tachesMisesAJour = taches.map((tache) => {
+            if ((tache.id === idTache) && (nouveauNomTache !== "")) {
+                return { ...tache, nom: nouveauNomTache };
             }
             return tache;
         });
-        setTaches(updatedTasks);
+        setTaches(tachesMisesAJour);
     }
 
     const handlePriorityChange = (tacheId, event) => {
-        const updatedtaches = taches.map(tache => {
+        const tachesMisesAJour = taches.map(tache => {
             if (tache.id === tacheId) {
                 tache.priorité = event.target.value;
             }
             return tache;
         });
 
-        setTaches(updatedtaches);
+        setTaches(tachesMisesAJour);
     }
 
-    const onDragEnd = (result) => {
-        if (!result.destination) {
+    const onDragEnd = (resultat) => {
+        if (!resultat.destination) {
             return;
         }
-
-        const updatedTaches = reorder(
+        const tachesMisesAJour = reorder(
             taches,
-            result.source.index,
-            result.destination.index
+            resultat.source.index,
+            resultat.destination.index
         );
-        setTaches(updatedTaches);
+        setTaches(tachesMisesAJour);
     };
+
 
     const longueurTableau = taches.length;
 
@@ -186,6 +173,5 @@ function ToDoList() {
         </MainStyled>
     );
 }
-
 
 export default ToDoList

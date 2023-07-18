@@ -4,7 +4,7 @@ import { StyleSheetManager } from 'styled-components';
 
 function App() {
   return (
-    <StyleSheetManager shouldForwardProp={(prop) => prop !== 'priority'}>
+    <StyleSheetManager shouldForwardProp={(prop) => prop !== 'priorite'}>
       <ToDoList />
     </StyleSheetManager>
   );
