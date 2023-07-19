@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/reactjs-todolist/static/css/main.fc5450bd.css",
+    "main.js": "/reactjs-todolist/static/js/main.cb9d7ff5.js",
+    "static/js/787.34d05ddd.chunk.js": "/reactjs-todolist/static/js/787.34d05ddd.chunk.js",
+    "static/media/Exo-VariableFont_wght.ttf": "/reactjs-todolist/static/media/Exo-VariableFont_wght.4c04cd875557390e68c2.ttf",
+    "static/media/Orbitron-VariableFont_wght.ttf": "/reactjs-todolist/static/media/Orbitron-VariableFont_wght.453377cb91a4554c36ce.ttf",
+    "index.html": "/reactjs-todolist/index.html",
+    "main.fc5450bd.css.map": "/reactjs-todolist/static/css/main.fc5450bd.css.map",
+    "main.cb9d7ff5.js.map": "/reactjs-todolist/static/js/main.cb9d7ff5.js.map",
+    "787.34d05ddd.chunk.js.map": "/reactjs-todolist/static/js/787.34d05ddd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc5450bd.css",
+    "static/js/main.cb9d7ff5.js"
+  ]
+}
