@@ -1,4 +1,3 @@
-import Banner from "./Banner"
 import ToDoList from "./ToDoList";
 import { StyleSheetManager } from 'styled-components';
 

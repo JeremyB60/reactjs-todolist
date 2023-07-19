@@ -23,7 +23,7 @@ const reorder = (liste, indexDebut, indexFin) => {
     return resultat;
 };
 
-const grid = 8;
+// const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     userSelect: "none",
