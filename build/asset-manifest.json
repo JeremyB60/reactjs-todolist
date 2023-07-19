@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.32be5e56.css",
+    "main.js": "/static/js/main.3f790d15.js",
+    "static/js/787.34d05ddd.chunk.js": "/static/js/787.34d05ddd.chunk.js",
+    "static/media/Exo-VariableFont_wght.ttf": "/static/media/Exo-VariableFont_wght.4c04cd875557390e68c2.ttf",
+    "static/media/Orbitron-VariableFont_wght.ttf": "/static/media/Orbitron-VariableFont_wght.453377cb91a4554c36ce.ttf",
+    "index.html": "/index.html",
+    "main.32be5e56.css.map": "/static/css/main.32be5e56.css.map",
+    "main.3f790d15.js.map": "/static/js/main.3f790d15.js.map",
+    "787.34d05ddd.chunk.js.map": "/static/js/787.34d05ddd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.32be5e56.css",
+    "static/js/main.3f790d15.js"
+  ]
+}
