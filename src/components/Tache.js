@@ -1,6 +1,7 @@
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react';
+import $ from 'jquery';
 
 const StyledButton = styled.button`
     width: 25px;
@@ -21,8 +22,9 @@ const StyledButton = styled.button`
 
 const StyledLi = styled.li`
     background-color: ${props => (props.priorite === 'faible' ? 'papayawhip' : props.priorite === 'normale' ? 'orange' : 'red')};
-    color: black
+    color: black;
     `
+
 const StyledButton3 = styled.button`
     background-color: cornsilk;
     font-weight: bold;
@@ -31,14 +33,24 @@ const StyledButton3 = styled.button`
         background-color: pink
     }
     `
+
 const StyledSelect = styled.select`
     background-color: #00000000;
     border: 0;
-`
+    `
 
 export default function Tache({ tacheInfo, onClick, onClick2, handleRename, handlePriorityChange }) {
     const [nouveauNom, setNouveauNom] = useState('');
     const [estVisible, setEstVisible] = useState(false);
+    const slideRef = useRef(null); 
+    const premierRendu = useRef(true);
+    useEffect(() => {
+        if (!premierRendu.current) {
+          $(slideRef.current).slideToggle('fast');
+        } else {
+          premierRendu.current = false;
+        }
+      }, [estVisible]);
 
     const handleChangeNom = (e) => {
         if (e.target.value !== null) {
@@ -70,11 +82,15 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
             <div className='d-flex flex-row-reverse gap-1'>
                 <StyledButton onClick={onClick} title='Supprimer la tâche'>&#10060;</StyledButton>
                 <StyledButton onClick={onClick2} title='Dupliquer la tâche'>&#x29C9;</StyledButton>
-                <StyledButton onClick={() => setEstVisible(!estVisible)} title='Renommer la tâche'>{((!estVisible) ? <span dangerouslySetInnerHTML={{__html: '&#x270F;'}}></span> : <span dangerouslySetInnerHTML={{__html: '&#9650;'}}></span>)}</StyledButton>
+                <StyledButton onClick={() => setEstVisible(!estVisible)} title='Renommer la tâche'>
+                    {!estVisible ?
+                        (<span dangerouslySetInnerHTML={{ __html: '&#x270F;' }}></span>) :
+                        (<span dangerouslySetInnerHTML={{ __html: '&#9650;' }}></span>)}
+                </StyledButton>
                 <div>
-                    <label htmlFor={tacheInfo.id+"priorite"}>Priorité :&nbsp;</label>
+                    <label htmlFor={tacheInfo.id + "priorite"}>Priorité :&nbsp;</label>
                     <StyledSelect
-                        id={tacheInfo.id+"priorite"}
+                        id={tacheInfo.id + "priorite"}
                         className='text-center'
                         value={tacheInfo.priorité}
                         onChange={event => handlePriorityChange(tacheInfo.id, event)}>
@@ -84,10 +100,10 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
                     </StyledSelect>
                 </div>
             </div>
-            {estVisible && <div>
+            <div ref={slideRef} style={{ display: 'none' }}>
                 <div className='flex-nowrap p-2'>
                     <input
-                        id={tacheInfo.id+1}
+                        id={tacheInfo.id + 1}
                         autoFocus
                         className='text-center'
                         type="text"
@@ -98,7 +114,7 @@ export default function Tache({ tacheInfo, onClick, onClick2, handleRename, hand
                     <StyledButton3 onClick={handleRenameClick} title='Valider'>&#10003;</StyledButton3>
                 </div>
             </div>
-            }
+
 
         </StyledLi>
     )

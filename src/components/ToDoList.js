@@ -130,7 +130,7 @@ function ToDoList() {
 
     //Affichage
     return (
-        <MainStyled className='bg-secondary'>
+        <MainStyled className='bg-secondary m-auto'>
             <Banner longueur={longueurTableau} />
             <TacheForm handleAdd={handleAdd} />
             <DragDropContext onDragEnd={onDragEnd}>

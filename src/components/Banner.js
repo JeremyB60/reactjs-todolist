@@ -8,15 +8,14 @@ text-align: center;
 font-family: 'Exo';
 `;
 
-const StyledText = styled.p`
-  color: orange;
-`;
+const StyledSpan = styled.span`
+color: orange
+`
 
 function Banner({ longueur }) {
 
   return <StyledBanner className='bg-dark text-light d-flex justify-content-center flex-column align-items-center'>
-    <h1 className='fs-4 pt-2 m-1'>Liste de tâches à&nbsp;réaliser&nbsp;({longueur})</h1>
-    <StyledText className='m-0'>Premier mini-projet Reactjs</StyledText>
+    <h1 className='fs-4'>Liste de tâches à&nbsp;réaliser&nbsp;(<StyledSpan>{longueur}</StyledSpan>)</h1>
   </StyledBanner>
 }
 
